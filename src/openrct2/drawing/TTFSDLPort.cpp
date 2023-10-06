@@ -388,7 +388,7 @@ static TTF_Font* TTF_OpenFontIndexRW(FILE* src, int freesrc, int ptsize, long in
         return NULL;
     }
 
-    font = static_cast<TTF_Font*>(malloc(sizeof *font));
+    font = new TTF_Font;
     if (font == NULL)
     {
         TTF_SetError("Out of memory");
@@ -403,7 +403,7 @@ static TTF_Font* TTF_OpenFontIndexRW(FILE* src, int freesrc, int ptsize, long in
     font->src = src;
     font->freesrc = freesrc;
 
-    stream = static_cast<FT_Stream>(malloc(sizeof(*stream)));
+    stream = new FT_Stream;
     if (stream == NULL)
     {
         TTF_SetError("Out of memory");
@@ -996,13 +996,13 @@ void TTF_CloseFont(TTF_Font* font)
         }
         if (font->args.stream)
         {
-            free(font->args.stream);
+            delete font->args.stream;
         }
         if (font->freesrc)
         {
             fclose(font->src);
         }
-        free(font);
+        delete font;
     }
 }
 
