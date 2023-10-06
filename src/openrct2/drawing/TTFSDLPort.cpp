@@ -403,7 +403,7 @@ static TTF_Font* TTF_OpenFontIndexRW(FILE* src, int freesrc, int ptsize, long in
     font->src = src;
     font->freesrc = freesrc;
 
-    stream = new FT_Stream;
+    stream = new FT_StreamRec_;
     if (stream == NULL)
     {
         TTF_SetError("Out of memory");
